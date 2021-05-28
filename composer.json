@@ -1,0 +1,33 @@
+{
+  "name": "mojave-hq/connections",
+  "description": "A package",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Steven Roland",
+      "email": "steven@mojave.io"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MojaveHQ\\Connections\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MojaveHQ\\Connections\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "MojaveHQ\\Connections\\ConnectionsServiceProvider"
+      ]
+    }
+  },
+  "require-dev": {
+    "orchestra/testbench": "^6.0",
+    "phpunit/phpunit": "^9.5"
+  }
+}
