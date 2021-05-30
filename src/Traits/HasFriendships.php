@@ -5,7 +5,6 @@ namespace MojaveHQ\Friends\Traits;
 use MojaveHQ\Friends\Models\Friendship;
 use MojaveHQ\Friends\Status;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Event;
 
 trait HasFriendships
 {
@@ -25,8 +24,6 @@ trait HasFriendships
         ]);
 
         $this->friends()->save($friendship);
-      
-        // Event::fire('friendships.sent', [$this, $recipient]);
 
         return $friendship;
     }
@@ -38,11 +35,7 @@ trait HasFriendships
      */
     public function unfriend(Model $recipient)
     {
-        $deleted = $this->findFriendship($recipient)->delete();
-
-        // Event::fire('friendships.cancelled', [$this, $recipient]);
-
-        return $deleted;
+        return $this->findFriendship($recipient)->delete();
     }
 
     /**
@@ -89,14 +82,10 @@ trait HasFriendships
      * @return bool|int
      */
     public function acceptFriendRequest(Model $recipient)
-    {
-        $updated = $this->findFriendship($recipient)->whereRecipient($this)->update([
+    {      
+        return $this->findFriendship($recipient)->whereRecipient($this)->update([
             'status' => Status::ACCEPTED,
         ]);
-
-        // Event::fire('friendships.accepted', [$this, $recipient]);
-      
-        return $updated;
     }
 
     /**
@@ -106,13 +95,9 @@ trait HasFriendships
      */
     public function denyFriendRequest(Model $recipient)
     {
-        $updated = $this->findFriendship($recipient)->whereRecipient($this)->update([
+        return $this->findFriendship($recipient)->whereRecipient($this)->update([
             'status' => Status::DENIED,
         ]);
-
-        // Event::fire('friendships.denied', [$this, $recipient]);
-      
-        return $updated;
     }
 
     /**
@@ -132,8 +117,6 @@ trait HasFriendships
       
         $this->friends()->save($friendship);
 
-        // Event::fire('friendships.blocked', [$this, $recipient]);
-
         return $friendship;
     }
 
@@ -144,13 +127,9 @@ trait HasFriendships
      */
     public function unblockFriend(Model $recipient)
     {
-        $deleted = $this->findFriendship($recipient)
+        return $this->findFriendship($recipient)
             ->whereSender($this)
             ->delete();
-
-        // Event::fire('friendships.unblocked', [$this, $recipient]);
-      
-        return $deleted;
     }
 
     /**
