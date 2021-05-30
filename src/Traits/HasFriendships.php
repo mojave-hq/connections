@@ -26,7 +26,7 @@ trait HasFriendships
 
         $this->friends()->save($friendship);
       
-        Event::fire('friendships.sent', [$this, $recipient]);
+        // Event::fire('friendships.sent', [$this, $recipient]);
 
         return $friendship;
     }
@@ -40,7 +40,7 @@ trait HasFriendships
     {
         $deleted = $this->findFriendship($recipient)->delete();
 
-        Event::fire('friendships.cancelled', [$this, $recipient]);
+        // Event::fire('friendships.cancelled', [$this, $recipient]);
 
         return $deleted;
     }
@@ -94,7 +94,7 @@ trait HasFriendships
             'status' => Status::ACCEPTED,
         ]);
 
-        Event::fire('friendships.accepted', [$this, $recipient]);
+        // Event::fire('friendships.accepted', [$this, $recipient]);
       
         return $updated;
     }
@@ -110,7 +110,7 @@ trait HasFriendships
             'status' => Status::DENIED,
         ]);
 
-        Event::fire('friendships.denied', [$this, $recipient]);
+        // Event::fire('friendships.denied', [$this, $recipient]);
       
         return $updated;
     }
@@ -126,13 +126,13 @@ trait HasFriendships
             $this->findFriendship($recipient)->delete();
         }
 
-        $friendship = (new Friendships)->fillRecipient($recipient)->fill([
+        $friendship = (new Friendship)->fillRecipient($recipient)->fill([
             'status' => Status::BLOCKED,
         ]);
       
         $this->friends()->save($friendship);
 
-        Event::fire('friendships.blocked', [$this, $recipient]);
+        // Event::fire('friendships.blocked', [$this, $recipient]);
 
         return $friendship;
     }
@@ -148,7 +148,7 @@ trait HasFriendships
             ->whereSender($this)
             ->delete();
 
-        Event::fire('friendships.unblocked', [$this, $recipient]);
+        // Event::fire('friendships.unblocked', [$this, $recipient]);
       
         return $deleted;
     }
@@ -420,7 +420,7 @@ trait HasFriendships
             $friendships->pluck('sender_id')->all() // senders
         ));
 
-        $fofs = Friendship::where('status', Status::ACCEPTED)
+        $friendsOfFriends = Friendship::where('status', Status::ACCEPTED)
                             ->where(function ($query) use ($friendIds) {
                                 $query->where(function ($q) use ($friendIds) {
                                     $q->whereIn('sender_id', $friendIds);
@@ -430,11 +430,11 @@ trait HasFriendships
                             })
                             ->get(['sender_id', 'recipient_id']);
 
-        $fofIds = array_unique(
-            array_merge($fofs->pluck('sender_id')->all(), $fofs->pluck('recipient_id')->all())
-        );
-
-        return $this->whereIn('id', $fofIds)->whereNotIn('id', $friendIds);
+        return $this->whereIn('id', array_unique(
+                array_merge(
+                    $friendsOfFriends->pluck('sender_id')->all(), // senders
+                    $friendsOfFriends->pluck('recipient_id')->all()) // recipients
+                ))->whereNotIn('id', $friendIds);
     }
 
     /**

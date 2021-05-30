@@ -15,12 +15,11 @@ class Friendship extends Model
      */
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = config('friends.tables.friends_pivot');
+    public function __construct() {
+        parent::__construct();
+
+        $this->table = config('friends.tables.friends_pivot');
+    }
 
     /**
      * Undocumented function

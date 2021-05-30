@@ -3,7 +3,7 @@
 return [
 
     'tables' => [
-        'connections_pivot' => 'friends',
+        'friends_pivot' => 'friends',
     ],
 
 ];

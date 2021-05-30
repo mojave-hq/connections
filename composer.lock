@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c18c069730e403d45a355d524a4c2e63",
+    "content-hash": "2a2f5df4748b5c9b179f26335c8a37c2",
     "packages": [],
     "packages-dev": [
         {
@@ -4154,16 +4154,16 @@
         },
         {
             "name": "spatie/ray",
-            "version": "1.22.1",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ray.git",
-                "reference": "e82408b78b1391eaee6c962b13c37e80080dc15a"
+                "reference": "604fefb5e18dbf95f448843cd08005d9d312345b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ray/zipball/e82408b78b1391eaee6c962b13c37e80080dc15a",
-                "reference": "e82408b78b1391eaee6c962b13c37e80080dc15a",
+                "url": "https://api.github.com/repos/spatie/ray/zipball/604fefb5e18dbf95f448843cd08005d9d312345b",
+                "reference": "604fefb5e18dbf95f448843cd08005d9d312345b",
                 "shasum": ""
             },
             "require": {
@@ -4213,7 +4213,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/ray/issues",
-                "source": "https://github.com/spatie/ray/tree/1.22.1"
+                "source": "https://github.com/spatie/ray/tree/1.23.0"
             },
             "funding": [
                 {
@@ -4225,7 +4225,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-04-28T09:47:47+00:00"
+            "time": "2021-05-29T09:04:39+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

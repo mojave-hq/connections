@@ -25,7 +25,7 @@ class FriendshipServiceProvider extends ServiceProvider
             }
 
             $this->publishes([
-                __DIR__ . '../config/friends.php' => config_path('friends.php'),
+                __DIR__ . '/../config/friends.php' => config_path('friends.php'),
             ], 'config');
         }
 	}
