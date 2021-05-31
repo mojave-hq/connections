@@ -15,7 +15,7 @@ class FriendshipServiceProvider extends ServiceProvider
 	{
         if ($this->app->runningInConsole()) {
 
-            $stub = __DIR__ . '../database/migrations/';
+            $stub = __DIR__ . '/../database/migrations/';
             $target = database_path('migrations') . '/';
 
             if (! class_exists('CreateFriendsPivotTable')) {
